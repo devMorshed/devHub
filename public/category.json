@@ -1,0 +1,24 @@
+{
+	"jobs": [
+		{
+			"image": "https://i.ibb.co/sK0xLr8/social-media-1.png",
+			"category": "Software Engineer",
+			"jobs_available": 500
+		},
+		{
+			"image": "https://i.ibb.co/dL6RHH0/chip-1.png",
+			"category": "Data Analyst",
+			"jobs_available": 300
+		},
+		{
+			"image": "https://i.ibb.co/vxn1cSF/business-1.png",
+			"category": "Network Administrator",
+			"jobs_available": 200
+		},
+		{
+			"image": "https://i.ibb.co/3N60ys1/accounts-1.png",
+			"category": "Web Developer",
+			"jobs_available": 400
+		}
+	]
+}
