@@ -4,7 +4,7 @@ import Button from './Button';
 
 const Header = () => {
   return (
-		<div className="container my-4 mx-auto flex justify-around items-center">
+		<div className="container my-4 mx-auto flex justify-around items-center sticky top-0">
 			<div className="brand">
 				<Link
 					to="/"
