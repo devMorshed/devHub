@@ -4,7 +4,7 @@ import Button from './Button';
 
 const Header = () => {
   return (
-		<div className=" py-2  sticky top-0 bg-slate-200 ">
+		<div className=" py-2  sticky top-0 bg-slate-200 z-50 ">
 			<div className="container mx-auto flex justify-around items-center">
 				<div className="brand">
 					<Link
