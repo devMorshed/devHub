@@ -6,14 +6,14 @@ import Button from "../components/Button";
 
 const AppliedJobs = () => {
 	const appliedJobs = getAppliedJobs();
-	// console.log(appliedJobs);
-
+	const [filter, setFilter] = useState("All");
 	const [applied, setApplied] = useState([]);
+
 	useEffect(() => {
+		let arr = [];
 		fetch("jobs.json")
 			.then((res) => res.json())
 			.then((data) => {
-				let arr = [];
 				for (const key in appliedJobs) {
 					const jobb = data.jobs.find((j) => j.id === parseInt(key));
 					arr.push(jobb);
@@ -22,14 +22,35 @@ const AppliedJobs = () => {
 			});
 	}, []);
 
+	let filteredJobs = applied.filter((pro) => {
+		if (filter === "Remote") {
+			return pro.remote_or_onsite === "Remote";
+		} else if (filter === "Onsite") {
+			return pro.remote_or_onsite === "Onsite";
+		} else {
+			return pro;
+		}
+	});
+
 	return (
 		<div className="">
 			<div className="bg-slate-200 py-24  text-center">
 				<h3 className="text-5xl">Applied Jobs </h3>
 			</div>
-			<div className="my-10 container mx-auto">
-				{applied.length > 0 &&
-					applied.map((job, index) => (
+			<div className="flex justify-end gap-4 items-center my-8 container">
+				<label htmlFor="job-filter">Filter by:</label>
+				<select
+					onClick={(e) => setFilter(e.target.value)}
+					name="filter"
+					id="job-filter">
+					<option value="All">All</option>
+					<option value="Remote">Remote</option>
+					<option value="Onsite">Onsite</option>
+				</select>
+			</div>
+			<div className="container mx-auto">
+				{filteredJobs.length > 0 &&
+					filteredJobs.map((job, index) => (
 						<div
 							key={job.id}
 							className="border p-6 rounded-md  text-gray-600 flex justify-center gap-4 md:gap-10 my-4 lg:gap-12 items-center">
