@@ -23,7 +23,9 @@ const Header = () => {
 					Blogs
 				</NavLink>
 			</div>
-			<Button text="Start Applying" />
+			<Link to='/'>
+				<Button text="Start Applying" />
+			</Link>
 		</div>
   );
 };
