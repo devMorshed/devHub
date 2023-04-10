@@ -13,24 +13,28 @@ const AppliedJobs = () => {
 		let arr = [];
 		fetch("jobs.json")
 			.then((res) => res.json())
-			.then((data) => {
+      .then((data) => {
+        // getting jobs information using id set to local storage.
 				for (const key in appliedJobs) {
 					const jobb = data.jobs.find((j) => j.id === parseInt(key));
 					arr.push(jobb);
-				}
-				setApplied(arr);
-			});
-	}, []);
-
-	let filteredJobs = applied.filter((pro) => {
-		if (filter === "Remote") {
-			return pro.remote_or_onsite === "Remote";
-		} else if (filter === "Onsite") {
-			return pro.remote_or_onsite === "Onsite";
-		} else {
-			return pro;
-		}
-	});
+        }
+        
+        //after pushed all the jobs in array, filtering the array for its job location filter outside pushing scope.
+				let filteredJobs = arr.filter((pro) => {
+					if (filter === "Remote") {
+						return pro.remote_or_onsite === "Remote";
+					} else if (filter === "Onsite") {
+						return pro.remote_or_onsite === "Onsite";
+					} else {
+						return pro;
+					}
+        });
+        // after filtering setting the result to applied jobs
+				setApplied(filteredJobs);
+      });
+    // using filter as dependency
+	}, [filter]);
 
 	return (
 		<div className="">
@@ -49,8 +53,8 @@ const AppliedJobs = () => {
 				</select>
 			</div>
 			<div className="container mx-auto">
-				{filteredJobs.length > 0 &&
-					filteredJobs.map((job, index) => (
+				{applied.length > 0 &&
+					applied.map((job, index) => (
 						<div
 							key={job.id}
 							className="border p-6 rounded-md  text-gray-600 flex justify-center gap-4 md:gap-10 my-4 lg:gap-12 items-center">
