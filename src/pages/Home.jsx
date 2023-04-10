@@ -158,7 +158,7 @@ const Home = () => {
 							</div>
 						))}
 				</div>
-				<div className="my-10 text-center" onClick={() => handleShow()}>
+				<div className="my-10 w-32 mx-auto" onClick={() => handleShow()}>
 					<Button text="See All Jobs" />
 				</div>
 			</section>
