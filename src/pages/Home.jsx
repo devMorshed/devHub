@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Button from "../components/Button";
 import SectionHeading from "../components/SectionHeading";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import Tag from "../components/Tag";
 
 const Home = () => {
 	const [jobs, setJobs] = useState([]);
 	const [all, setAll] = useState("");
+	const [categories, setCategories] = useState([]);
 
 	useEffect(() => {
 		fetch("jobs.json")
@@ -20,13 +21,16 @@ const Home = () => {
 			});
 	}, [all]);
 
-	const handleJobs = (jobs) => {
+	const handleShow = () => {
 		setAll(true);
 	};
 
-	const categories = useLoaderData();
-
-
+	//using loader facing issue during dynamic link to home. so double useEffect
+	useEffect(() => {
+		fetch("category.json")
+			.then((res) => res.json())
+			.then((data) => setCategories(data));
+	}, []);
 
 	return (
 		<div className=" ">
@@ -62,19 +66,20 @@ const Home = () => {
 					head="Job Category List"
 				/>
 				<div className="px-10 container mx-auto grid grid-cols-2 lg:grid-cols-4 gap-6 my-10">
-					{categories.jobs.map((category, index) => (
-						<div
-							key={index}
-							className="space-y-2 bg-slate-200 p-4 rounded-xl">
-							<img
-								className="bg-slate-300 p-3 rounded-md"
-								src={category.image}
-								alt=""
-							/>
-							<p>{category.category}</p>
-							<p>{category.jobs_available}+ Jobs Available</p>
-						</div>
-					))}
+					{categories.jobs &&
+						categories.jobs.map((category, index) => (
+							<div
+								key={index}
+								className="space-y-2 bg-slate-200 p-4 rounded-xl">
+								<img
+									className="bg-slate-300 p-3 rounded-md"
+									src={category.image}
+									alt=""
+								/>
+								<p>{category.category}</p>
+								<p>{category.jobs_available}+ Jobs Available</p>
+							</div>
+						))}
 				</div>
 			</section>
 			<section>
@@ -125,7 +130,6 @@ const Home = () => {
 											<p>{job.location}</p>
 										</div>
 										<div className="flex">
-											
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
 												fill="none"
@@ -143,13 +147,18 @@ const Home = () => {
 										</div>
 									</div>
 								</div>
-								<div className="mt-auto">
-									<Button text="View Details" />
+
+								<div
+									
+									className="mt-auto">
+									<Link to={`/jobs/${job.id}`} state={{from: job}}>
+										<Button text="View Details" />
+									</Link>
 								</div>
 							</div>
 						))}
 				</div>
-				<div className="my-10 text-center" onClick={() => handleJobs()}>
+				<div className="my-10 text-center" onClick={() => handleShow()}>
 					<Button text="See All Jobs" />
 				</div>
 			</section>

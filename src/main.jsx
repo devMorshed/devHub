@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { RouterProvider, createBrowserRouter, useParams } from 'react-router-dom'
 import Home from './pages/Home'
 import Jobdetails from './pages/Jobdetails'
 import Statistics from './pages/Statistics'
@@ -17,15 +17,16 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
-        loader: () => fetch('category.json')
+        
       },
       {
         path: '/applied',
-        element: <AppliedJobs/>,
+        element: <AppliedJobs />,
       },
       {
-        path: '/jobdetails',
-        element: <Jobdetails/>,
+        path: '/jobs/:id',
+        element: <Jobdetails />,
+        
       },
       {
         path: '/statistics',
