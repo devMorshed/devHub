@@ -1,39 +1,42 @@
 import { useLocation } from "react-router-dom";
 import Button from "../components/Button";
+import { addToDB } from "../utils/utils";
+import { Toaster } from "react-hot-toast";
 
 const Jobdetails = () => {
 	const location = useLocation();
 	const job = location.state.from;
-	console.log(job);
+	// console.log(job);
 	return (
 		<div className=" ">
 			<div className="bg-slate-200 py-24  text-center">
 				<h3 className="text-5xl">Job Details</h3>
 			</div>
+			<Toaster />
 			<div className="flex items-center flex-col md:flex-row container mx-auto">
-				<div >
+				<div>
 					<div className="space-y-4 p-20">
 						<p>
-							Job Description: <br/>
+							Job Description: <br />
 							<span className="text-gray-600">
 								{" "}
 								{job.job_description}
 							</span>
 						</p>
 						<p>
-							Job Responsibility: <br/>
+							Job Responsibility: <br />
 							<span className="text-gray-600">
 								{job.job_responsibility}
 							</span>
 						</p>
 						<p>
-							Educational Recquirements:  <br/>
+							Educational Recquirements: <br />
 							<span className="text-gray-600">
 								{job.educational_requirements}
 							</span>
 						</p>
 						<p>
-							Experiences: <br/>
+							Experiences: <br />
 							<span className="text-gray-600">
 								{job.experiences}
 							</span>
@@ -151,8 +154,12 @@ const Jobdetails = () => {
 							</div>
 						</div>
 					</div>
-					<div className="text-center my-4">
-						<Button text='Apply Now' />
+					<div
+						onClick={() => {
+							addToDB(job.id);
+						}}
+						className="text-center my-4">
+						<Button text="Apply Now" />
 					</div>
 				</div>
 			</div>
