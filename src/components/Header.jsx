@@ -13,7 +13,7 @@ const Header = () => {
 						devHub
 					</Link>
 				</div>
-				<div className="flex gap-4">
+				<div className="flex gap-2 md:gap-4 lg:gap-8">
 					<NavLink className="hover:text-orange-600" to="/statistics">
 						Statistics
 					</NavLink>

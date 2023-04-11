@@ -151,7 +151,7 @@ const Home = () => {
 								<div
 									
 									className="mt-auto">
-									<Link to={`/jobs/${job.id}`} state={{from: job}}>
+									<Link to={`/jobs/${job.id}`} state={{job: job}}>
 										<Button text="View Details" />
 									</Link>
 								</div>

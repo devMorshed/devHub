@@ -13,14 +13,14 @@ const AppliedJobs = () => {
 		let arr = [];
 		fetch("jobs.json")
 			.then((res) => res.json())
-      .then((data) => {
-        // getting jobs information using id set to local storage.
+			.then((data) => {
+				// getting jobs information using id set to local storage.
 				for (const key in appliedJobs) {
 					const jobb = data.jobs.find((j) => j.id === parseInt(key));
 					arr.push(jobb);
-        }
-        
-        //after pushed all the jobs in array, filtering the array for its job location filter outside pushing scope.
+				}
+
+				//after pushed all the jobs in array, filtering the array for its job location filter outside pushing scope.
 				let filteredJobs = arr.filter((pro) => {
 					if (filter === "Remote") {
 						return pro.remote_or_onsite === "Remote";
@@ -29,11 +29,11 @@ const AppliedJobs = () => {
 					} else {
 						return pro;
 					}
-        });
-        // after filtering setting the result to applied jobs
+				});
+				// after filtering setting the result to applied jobs
 				setApplied(filteredJobs);
-      });
-    // using filter as dependency
+			});
+		// using filter as dependency
 	}, [filter]);
 
 	return (
@@ -53,7 +53,7 @@ const AppliedJobs = () => {
 				</select>
 			</div>
 			<div className="container mx-auto">
-				{applied.length > 0 &&
+				{applied.length > 0 ? (
 					applied.map((job, index) => (
 						<div
 							key={job.id}
@@ -123,7 +123,17 @@ const AppliedJobs = () => {
 								</Link>
 							</div>
 						</div>
-					))}
+					))
+				) : (
+					<div className="my-20 text-center">
+						<h3 className="text-4xl">
+							Didnt apllied to any job yet!
+						</h3>
+						<p className="text-7xl my-10 bg-clip-text text-transparent bg-gradient-to-r font-medium  from-indigo-400 to-violet-500">
+							Hurry Up!!!!
+						</p>
+					</div>
+				)}
 			</div>
 		</div>
 	);

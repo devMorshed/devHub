@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 
 const Jobdetails = () => {
 	const location = useLocation();
-	const job = location.state.from;
+	const job = location.state.job;
 	// console.log(job);
 	return (
 		<div className=" ">
