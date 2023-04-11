@@ -8,11 +8,13 @@ import Jobdetails from './pages/Jobdetails'
 import Statistics from './pages/Statistics'
 import Blogs from './pages/Blogs'
 import AppliedJobs from './pages/AppliedJobs'
+import Errorpage from './pages/Errorpage'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <Errorpage/>,
     children: [
       {
         path: '/',
@@ -37,6 +39,10 @@ const router = createBrowserRouter([
         element: <Blogs/>,
       }
     ]
+  },
+  {
+    path: '*',
+    element: <Errorpage/>
   }
 ])
 
